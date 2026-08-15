@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "output_item_done",
+  "display_name": "输出项完成",
+  "description": "Hermes 事件 response.output_item.done 的守岸人像素桌宠动作。",
+  "event": {
+    "name": "response.output_item.done",
+    "source": "sse"
+  },
+  "state": "response.item_done",
+  "playback": "once",
+  "loop": false,
+  "interruptible": true,
+  "fps": 10,
+  "frame_duration_ms": 100,
+  "frame_count": 12,
+  "gif_frame_count": 9,
+  "duration_ms": 1200,
+  "canvas": {
+    "width": 160,
+    "height": 120
+  },
+  "anchor": {
+    "x": 0.5,
+    "y": 1.0
+  },
+  "gif": "output_item_done.gif",
+  "webp_preview": "preview.webp",
+  "frames": [
+    "frames/frame_000.png",
+    "frames/frame_001.png",
+    "frames/frame_002.png",
+    "frames/frame_003.png",
+    "frames/frame_004.png",
+    "frames/frame_005.png",
+    "frames/frame_006.png",
+    "frames/frame_007.png",
+    "frames/frame_008.png",
+    "frames/frame_009.png",
+    "frames/frame_010.png",
+    "frames/frame_011.png"
+  ],
+  "lifecycle": {
+    "priority": 64,
+    "fallback_state": "agent.thinking",
+    "coalesce_ms": 150,
+    "restart_on_repeat": true
+  }
+}

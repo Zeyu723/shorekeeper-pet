@@ -1,0 +1,268 @@
+{
+  "schema_version": 1,
+  "name": "Hermes 守岸人事件动作库存",
+  "canvas": {
+    "width": 160,
+    "height": 120
+  },
+  "actions": [
+    {
+      "event": {
+        "name": "gateway:startup",
+        "source": "hook"
+      },
+      "action_id": "gateway_startup",
+      "manifest": "gateway_startup/manifest.json",
+      "gif": "gateway_startup/gateway_startup.gif",
+      "state": "system.starting",
+      "playback": "once",
+      "priority": 20,
+      "fallback_state": "awake.idle",
+      "coalesce_ms": 0
+    },
+    {
+      "event": {
+        "name": "session:start",
+        "source": "hook"
+      },
+      "action_id": "session_start",
+      "manifest": "session_start/manifest.json",
+      "gif": "session_start/session_start.gif",
+      "state": "session.starting",
+      "playback": "once",
+      "priority": 35,
+      "fallback_state": "awake.idle",
+      "coalesce_ms": 0
+    },
+    {
+      "event": {
+        "name": "session:end",
+        "source": "hook"
+      },
+      "action_id": "session_end",
+      "manifest": "session_end/manifest.json",
+      "gif": "session_end/session_end.gif",
+      "state": "session.ending",
+      "playback": "once",
+      "priority": 35,
+      "fallback_state": "sleeping.idle",
+      "coalesce_ms": 0
+    },
+    {
+      "event": {
+        "name": "session:reset",
+        "source": "hook"
+      },
+      "action_id": "session_reset",
+      "manifest": "session_reset/manifest.json",
+      "gif": "session_reset/session_reset.gif",
+      "state": "session.resetting",
+      "playback": "once",
+      "priority": 45,
+      "fallback_state": "awake.idle",
+      "coalesce_ms": 0
+    },
+    {
+      "event": {
+        "name": "agent:start",
+        "source": "hook"
+      },
+      "action_id": "agent_start",
+      "manifest": "agent_start/manifest.json",
+      "gif": "agent_start/agent_start.gif",
+      "state": "agent.thinking",
+      "playback": "hold",
+      "priority": 50,
+      "fallback_state": "awake.idle",
+      "coalesce_ms": 250
+    },
+    {
+      "event": {
+        "name": "agent:step",
+        "source": "hook"
+      },
+      "action_id": "agent_step",
+      "manifest": "agent_step/manifest.json",
+      "gif": "agent_step/agent_step.gif",
+      "state": "agent.thinking.step",
+      "playback": "once",
+      "priority": 55,
+      "fallback_state": "agent.thinking",
+      "coalesce_ms": 350
+    },
+    {
+      "event": {
+        "name": "agent:end",
+        "source": "hook"
+      },
+      "action_id": "agent_end",
+      "manifest": "agent_end/manifest.json",
+      "gif": "agent_end/agent_end.gif",
+      "state": "agent.finishing",
+      "playback": "once",
+      "priority": 60,
+      "fallback_state": "awake.idle",
+      "coalesce_ms": 0
+    },
+    {
+      "event": {
+        "name": "command:*",
+        "source": "hook"
+      },
+      "action_id": "command_any",
+      "manifest": "command_any/manifest.json",
+      "gif": "command_any/command_any.gif",
+      "state": "command.running",
+      "playback": "once",
+      "priority": 65,
+      "fallback_state": "awake.idle",
+      "coalesce_ms": 200
+    },
+    {
+      "event": {
+        "name": "response.created",
+        "source": "sse"
+      },
+      "action_id": "response_created",
+      "manifest": "response_created/manifest.json",
+      "gif": "response_created/response_created.gif",
+      "state": "response.starting",
+      "playback": "hold",
+      "priority": 52,
+      "fallback_state": "agent.thinking",
+      "coalesce_ms": 250
+    },
+    {
+      "event": {
+        "name": "response.output_text.delta",
+        "source": "sse"
+      },
+      "action_id": "response_text_delta",
+      "manifest": "response_text_delta/manifest.json",
+      "gif": "response_text_delta/response_text_delta.gif",
+      "state": "response.streaming_text",
+      "playback": "hold",
+      "priority": 58,
+      "fallback_state": "agent.thinking",
+      "coalesce_ms": 300
+    },
+    {
+      "event": {
+        "name": "response.output_text.done",
+        "source": "sse"
+      },
+      "action_id": "response_text_done",
+      "manifest": "response_text_done/manifest.json",
+      "gif": "response_text_done/response_text_done.gif",
+      "state": "response.text_done",
+      "playback": "once",
+      "priority": 62,
+      "fallback_state": "agent.thinking",
+      "coalesce_ms": 200
+    },
+    {
+      "event": {
+        "name": "response.output_item.added",
+        "source": "sse"
+      },
+      "action_id": "output_item_added",
+      "manifest": "output_item_added/manifest.json",
+      "gif": "output_item_added/output_item_added.gif",
+      "state": "response.item_added",
+      "playback": "once",
+      "priority": 61,
+      "fallback_state": "agent.thinking",
+      "coalesce_ms": 150
+    },
+    {
+      "event": {
+        "name": "response.output_item.done",
+        "source": "sse"
+      },
+      "action_id": "output_item_done",
+      "manifest": "output_item_done/manifest.json",
+      "gif": "output_item_done/output_item_done.gif",
+      "state": "response.item_done",
+      "playback": "once",
+      "priority": 64,
+      "fallback_state": "agent.thinking",
+      "coalesce_ms": 150
+    },
+    {
+      "event": {
+        "name": "tool.started",
+        "source": "sse"
+      },
+      "action_id": "tool_started",
+      "manifest": "tool_started/manifest.json",
+      "gif": "tool_started/tool_started.gif",
+      "state": "tool.running",
+      "playback": "hold",
+      "priority": 80,
+      "fallback_state": "agent.thinking",
+      "coalesce_ms": 150
+    },
+    {
+      "event": {
+        "name": "tool.completed",
+        "source": "sse"
+      },
+      "action_id": "tool_completed",
+      "manifest": "tool_completed/manifest.json",
+      "gif": "tool_completed/tool_completed.gif",
+      "state": "tool.succeeded",
+      "playback": "once",
+      "priority": 85,
+      "fallback_state": "agent.thinking",
+      "coalesce_ms": 150
+    },
+    {
+      "event": {
+        "name": "tool.failed",
+        "source": "sse"
+      },
+      "action_id": "tool_failed",
+      "manifest": "tool_failed/manifest.json",
+      "gif": "tool_failed/tool_failed.gif",
+      "state": "tool.failed",
+      "playback": "once",
+      "priority": 95,
+      "fallback_state": "agent.thinking",
+      "coalesce_ms": 150
+    },
+    {
+      "event": {
+        "name": "response.completed",
+        "source": "sse"
+      },
+      "action_id": "response_completed",
+      "manifest": "response_completed/manifest.json",
+      "gif": "response_completed/response_completed.gif",
+      "state": "response.completed",
+      "playback": "once",
+      "priority": 90,
+      "fallback_state": "awake.idle",
+      "coalesce_ms": 250
+    },
+    {
+      "event": {
+        "name": "response.failed",
+        "source": "sse"
+      },
+      "action_id": "response_failed",
+      "manifest": "response_failed/manifest.json",
+      "gif": "response_failed/response_failed.gif",
+      "state": "response.failed",
+      "playback": "once",
+      "priority": 100,
+      "fallback_state": "awake.idle",
+      "coalesce_ms": 250
+    }
+  ],
+  "policy": {
+    "event_preemption": "higher_priority_wins",
+    "hold_actions": "do not restart on repeated events; keep playing until a terminal event changes state",
+    "once_actions": "play once, then transition to fallback_state unless a newer higher-priority event arrived",
+    "deduplication": "if hook and SSE represent the same transition, deduplicate within 300ms using session_id/run_id/tool id when available"
+  }
+}

@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Build artifacts
+build/
+dist/
+*.spec
+*.exe
+
+# Logs
+*.log
+pet_out.log
+
+# Dev screenshots / scratch
+desktop_screenshot.png
+screen*.png
+*.local.png
+
+# Backups stay local only
+backups/
+*.bak-chat
+app.py.pre-*
+app.py.recovered-*
+app.py.wrong-*
+app.py.stable-*
+plugin.js.pre-*
+plugin.js.stable-*
+
+# Hermes session plans / review artifacts (local dev notes)
+.hermes/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Test cache
+.pytest_cache/
+tests/__pycache__/

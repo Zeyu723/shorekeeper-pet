@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "response_text_delta",
+  "display_name": "正在输出文字",
+  "description": "Hermes 事件 response.output_text.delta 的守岸人像素桌宠动作。",
+  "event": {
+    "name": "response.output_text.delta",
+    "source": "sse"
+  },
+  "state": "response.streaming_text",
+  "playback": "hold",
+  "loop": true,
+  "interruptible": true,
+  "fps": 10,
+  "frame_duration_ms": 100,
+  "frame_count": 12,
+  "gif_frame_count": 12,
+  "duration_ms": 1200,
+  "canvas": {
+    "width": 160,
+    "height": 120
+  },
+  "anchor": {
+    "x": 0.5,
+    "y": 1.0
+  },
+  "gif": "response_text_delta.gif",
+  "webp_preview": "preview.webp",
+  "frames": [
+    "frames/frame_000.png",
+    "frames/frame_001.png",
+    "frames/frame_002.png",
+    "frames/frame_003.png",
+    "frames/frame_004.png",
+    "frames/frame_005.png",
+    "frames/frame_006.png",
+    "frames/frame_007.png",
+    "frames/frame_008.png",
+    "frames/frame_009.png",
+    "frames/frame_010.png",
+    "frames/frame_011.png"
+  ],
+  "lifecycle": {
+    "priority": 58,
+    "fallback_state": "agent.thinking",
+    "coalesce_ms": 300,
+    "restart_on_repeat": false
+  }
+}

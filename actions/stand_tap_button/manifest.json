@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "id": "stand_tap_button",
+  "display_name": "起身敲按钮",
+  "description": "守岸人从趴伏姿势撑起身体、敲击左侧按钮，然后回到趴伏姿势的一次性互动动作。",
+  "state": "interaction",
+  "pose": {
+    "from": "lying",
+    "action": "upright_tap",
+    "to": "lying"
+  },
+  "mood": "calm",
+  "energy": "medium",
+  "loop": false,
+  "interruptible": false,
+  "fps": 10,
+  "frame_duration_ms": 100,
+  "frame_count": 48,
+  "canvas": {
+    "width": 160,
+    "height": 120
+  },
+  "anchor": {
+    "x": 0.5,
+    "y": 1.0
+  },
+  "gif": "stand-tap-button-once.gif",
+  "loop_preview_gif": "stand-tap-button.gif",
+  "webp_preview": "preview.webp",
+  "frames": [
+    "frames/frame_000.png",
+    "frames/frame_001.png",
+    "frames/frame_002.png",
+    "frames/frame_003.png",
+    "frames/frame_004.png",
+    "frames/frame_005.png",
+    "frames/frame_006.png",
+    "frames/frame_007.png",
+    "frames/frame_008.png",
+    "frames/frame_009.png",
+    "frames/frame_010.png",
+    "frames/frame_011.png",
+    "frames/frame_012.png",
+    "frames/frame_013.png",
+    "frames/frame_014.png",
+    "frames/frame_015.png",
+    "frames/frame_016.png",
+    "frames/frame_017.png",
+    "frames/frame_018.png",
+    "frames/frame_019.png",
+    "frames/frame_020.png",
+    "frames/frame_021.png",
+    "frames/frame_022.png",
+    "frames/frame_023.png",
+    "frames/frame_024.png",
+    "frames/frame_025.png",
+    "frames/frame_026.png",
+    "frames/frame_027.png",
+    "frames/frame_028.png",
+    "frames/frame_029.png",
+    "frames/frame_030.png",
+    "frames/frame_031.png",
+    "frames/frame_032.png",
+    "frames/frame_033.png",
+    "frames/frame_034.png",
+    "frames/frame_035.png",
+    "frames/frame_036.png",
+    "frames/frame_037.png",
+    "frames/frame_038.png",
+    "frames/frame_039.png",
+    "frames/frame_040.png",
+    "frames/frame_041.png",
+    "frames/frame_042.png",
+    "frames/frame_043.png",
+    "frames/frame_044.png",
+    "frames/frame_045.png",
+    "frames/frame_046.png",
+    "frames/frame_047.png"
+  ],
+  "lifecycle": {
+    "suggested_trigger": "interaction.button_tap",
+    "enter_from": [
+      "awake.idle",
+      "sleepy.idle"
+    ],
+    "exit_to": [
+      "awake.idle"
+    ],
+    "playback": "once",
+    "cooldown_ms": 8000,
+    "priority": 70
+  },
+  "source": {
+    "reference": "source/reference.mp4",
+    "note": "User-provided motion reference; background removed and normalized for desktop-pet use."
+  }
+}
