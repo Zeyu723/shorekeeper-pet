@@ -1711,17 +1711,50 @@ class PetMenu:
              "command": self.pet.close},
         ]
 
+    # Win32 helpers for the "Open Hermes" menu item (loaded lazily).
+    _WIN32_SHOW = None
+
     def _open_hermes_app(self) -> None:
-        """Bring the Hermes Desktop main window to the foreground."""
+        """Bring the Hermes Desktop main window up from any state.
+
+        Covers: foreground, background, minimized (iconic), and hidden-to-
+        tray. Falls back to launching the exe when Hermes is not running.
+        """
         try:
+            if PetMenu._WIN32_SHOW is None:
+                import ctypes
+
+                class _W32:
+                    user32 = ctypes.windll.user32
+
+                # SW_HIDE=0 SW_SHOW=5 SW_RESTORE=9
+                _W32.user32.ShowWindow.restype = ctypes.c_bool
+                _W32.user32.SetForegroundWindow.restype = ctypes.c_bool
+                PetMenu._WIN32_SHOW = _W32
             import subprocess
-            # PowerShell activates an existing window by process name
-            subprocess.Popen([
-                "powershell.exe", "-NoProfile", "-Command",
-                "$p = Get-Process -Name 'Hermes' -ErrorAction SilentlyContinue;"
-                "if ($p) { Add-Type -AssemblyName Microsoft.VisualBasic;"
-                "[Microsoft.VisualBasic.Interaction]::AppActivate($p[0].Id) }",
-            ])
+            w32 = PetMenu._WIN32_SHOW
+            script = (
+                "$p = Get-Process -Name 'Hermes' -ErrorAction SilentlyContinue "
+                "| Where-Object { $_.MainWindowHandle -ne 0 } "
+                "| Sort-Object MainWindowHandle -Descending "
+                "| Select-Object -First 1;"
+                "if ($p) {"
+                "  $h = $p.MainWindowHandle;"
+                "  Add-Type 'using System;using System.Runtime.InteropServices;"
+                "public class W{[DllImport(\"user32.dll\")]public static extern bool ShowWindow(IntPtr h,int n);"
+                "[DllImport(\"user32.dll\")]public static extern bool SetForegroundWindow(IntPtr h);}';"
+                "  [void][W]::ShowWindow($h, 5);"     # SW_SHOW (un-hide from tray)
+                "  [void][W]::ShowWindow($h, 9);"     # SW_RESTORE (un-minimize)
+                "  [void][W]::SetForegroundWindow($h)"
+                "} else {"
+                "  $exe = '$env:LOCALAPPDATA/hermes/hermes-agent/apps/desktop/release/win-unpacked/Hermes.exe';"
+                "  if (Test-Path $exe) { Start-Process $exe } else { Start-Process 'hermes://open' -ErrorAction SilentlyContinue } "
+                "}"
+            )
+            subprocess.Popen(
+                ["powershell.exe", "-NoProfile", "-Command", script],
+                creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
+            )
         except Exception as e:
             print(f"[menu] activate Hermes failed: {e}")
 
